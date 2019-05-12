@@ -157,6 +157,69 @@ const proxy = {
       });
     }
   },
+  'GET /api/getAreas': (req, res) => {
+    res.send({
+      status: 'ok',
+      data: [
+        {
+          label: '思学楼A区',
+          value: 'sx_a',
+        },
+        {
+          label: '思学楼B区',
+          value: 'sx_b',
+        },
+        {
+          label: '思学楼C区',
+          value: 'sx_c',
+        },
+        {
+          label: '思学楼D区',
+          value: 'sx_d',
+        },
+        {
+          label: '博学楼A区',
+          value: 'bx_a',
+        },
+        {
+          label: '博学楼B区',
+          value: 'bx_b',
+        },
+        {
+          label: '明德楼A区',
+          value: 'md_a',
+        },
+        {
+          label: '明德楼B区',
+          value: 'md_b',
+        },
+        {
+          label: '明志楼A区',
+          value: 'mz_a',
+        },
+        {
+          label: '明志楼B区',
+          value: 'mz_b',
+        },
+        {
+          label: '明辨楼C区',
+          value: 'mb_c',
+        },
+        {
+          label: '明理楼A区',
+          value: 'ml_a',
+        },
+        {
+          label: '明理楼B区',
+          value: 'ml_b',
+        },
+        {
+          label: '思学楼机房',
+          value: 'sxl',
+        },
+      ]
+    })
+  }
 };
 
 export default delay(proxy, 1000);

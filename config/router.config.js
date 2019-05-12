@@ -26,6 +26,18 @@ export default [
       // dashboard
       { path: '/', redirect: '/user/login' },
       {
+        path: '/em',
+        name: '设备管理',
+        icon: 'cluster',
+        routes: [
+          {
+            path: '/em/emcheck',
+            name: '设备查看',
+            component: './Em/EmCheck/index',
+          }
+        ]
+      },
+      {
         path: '/dashboard',
         name: 'dashboard',
         icon: 'dashboard',
