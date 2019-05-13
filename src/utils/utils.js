@@ -193,4 +193,4 @@ export const importCDN = (url, name) =>
     document.head.appendChild(dom);
   });
 
-export const Action = (type, payload) => ({ type, payload });
+export const Action = (type, payload = null) => ({ type, payload });

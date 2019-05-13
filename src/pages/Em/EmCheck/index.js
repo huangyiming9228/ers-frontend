@@ -1,11 +1,12 @@
 import React from 'react';
-import { Table, Card, Spin } from 'antd';
+import { Card, Spin } from 'antd';
 import { connect } from 'dva';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import QueryForm from './QueryForm';
+import EquipmentList from './EquipmentList';
 
 @connect(({ loading }) => ({
-  loading: loading.models.em
+  loading: loading.models.em,
 }))
 class EmCheck extends React.Component {
   render() {
@@ -15,10 +16,11 @@ class EmCheck extends React.Component {
         <Card bordered={false}>
           <Spin spinning={loading}>
             <QueryForm />
+            <EquipmentList />
           </Spin>
         </Card>
       </PageHeaderWrapper>
-    )
+    );
   }
 }
 
