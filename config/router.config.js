@@ -37,12 +37,12 @@ export default [
           },
           {
             path: '/em/roomauth',
-            name: '教室授权',
+            name: '教室管理',
             component: './Em/RoomAuth/index',
           },
           {
             path: '/em/areaauth',
-            name: '区域授权',
+            name: '区域管理',
             component: './Em/AreaAuth/index',
           }
         ]

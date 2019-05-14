@@ -4,6 +4,8 @@ import {
   getAreas,
   getUsers,
   updateAreaUser,
+  addArea,
+  deleteArea
 } from '@/services/em';
 
 export default {
@@ -14,6 +16,10 @@ export default {
     userList: [],
     authForm: {
       user_no: { value: null }
+    },
+    addForm: {
+      area_name: { value: null },
+      user_no: { value: null },
     }
   },
   reducers: {
@@ -50,6 +56,24 @@ export default {
         }));
       } else {
         message.error('更新失败！');
+      }
+    },
+    *addArea({ payload }, { call, put }) {
+      const { status, message: messages } = yield call(addArea, payload);
+      if (status === 'ok') {
+        message.success(messages);
+        yield put(Action('getAreas'));
+      } else {
+        message.error(messages);
+      }
+    },
+    *deleteArea({ payload }, { call, put }) {
+      const { status, message: messages } = yield call(deleteArea, payload.area_id);
+      if (status === 'ok') {
+        message.success(messages);
+        yield put(Action('getAreas'));
+      } else {
+        message.error(messages);
       }
     }
   },

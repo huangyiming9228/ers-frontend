@@ -47,3 +47,25 @@ export async function updateAreaUser(params) {
     data: params
   })
 }
+
+export async function addArea(params) {
+  return request('/server/api/base/addArea', {
+    method: 'POST',
+    data: params
+  })
+}
+
+export async function deleteArea(params) {
+  return request(`/server/api/base/deleteArea?area_id=${params}`)
+}
+
+export async function addRoom(params) {
+  return request('/server/api/base/addRoom', {
+    method: 'POST',
+    data: params
+  })
+}
+
+export async function deleteRoom(params) {
+  return request(`/server/api/base/deleteRoom?room_id=${params}`)
+}

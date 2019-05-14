@@ -1,7 +1,8 @@
 import React from 'react';
-import { Table, Button } from 'antd';
+import { Table, Button, Divider, Popconfirm } from 'antd';
 import { connect } from 'dva';
 import AuthModal from './AuthModal';
+import AddModal from './AddModal';
 import { Action } from '../../../utils/utils';
 
 
@@ -11,6 +12,7 @@ import { Action } from '../../../utils/utils';
 class RoomList extends React.Component {
   state = {
     modalVisible: false,
+    addModalVisible: false,
   };
 
   componentDidMount() {
@@ -18,6 +20,16 @@ class RoomList extends React.Component {
   }
 
   handleCancel = () => this.setState({ modalVisible: false });
+
+  handleAddModalCancel = () => this.setState({ addModalVisible: false })
+
+  handleAddClick = () => this.setState({ addModalVisible: true })
+
+  handleDelete = record => () => {
+    this.props.dispatch(Action('roomauth/deleteRoom', {
+      room_id: record.id
+    }))
+  }
 
   handleOk = () => this.props.dispatch(Action('roomauth/updateRoomUser'))
     .then(() => this.handleCancel())
@@ -34,7 +46,7 @@ class RoomList extends React.Component {
   handleBatchAuthClick = () => this.setState({ modalVisible: true })
 
   render() {
-    const { modalVisible } = this.state;
+    const { modalVisible, addModalVisible } = this.state;
     const { roomList, selectedRowKeys } = this.props;
     const columns = [
       {
@@ -61,6 +73,13 @@ class RoomList extends React.Component {
           return (
             <span>
               <a onClick={this.handleAuthClick(record)}>授权</a>
+              <Divider type="vertical" />
+              <Popconfirm
+                title="确定删除？"
+                onConfirm={this.handleDelete(record)}
+              >
+                <a>删除</a>
+              </Popconfirm>
             </span>
           );
         },
@@ -68,14 +87,24 @@ class RoomList extends React.Component {
     ];
     return (
       <div>
-        <div style={{ textAlign: 'right', height: '40px' }}>
-          <Button
-            disabled={!selectedRowKeys.length}
-            type="primary"
-            onClick={this.handleBatchAuthClick}
-          >
-            批量授权
-          </Button>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '40px' }}>
+          <div>
+            <Button
+              type="primary"
+              onClick={this.handleAddClick}
+            >
+              新增教室
+            </Button>
+          </div>
+          <div>
+            <Button
+              disabled={!selectedRowKeys.length}
+              type="primary"
+              onClick={this.handleBatchAuthClick}
+            >
+              批量授权
+            </Button>
+          </div>
         </div>
         <Table
           columns={columns}
@@ -90,6 +119,10 @@ class RoomList extends React.Component {
           modalVisible={modalVisible}
           handleCancel={this.handleCancel}
           handleOk={this.handleOk}
+        />
+        <AddModal
+          addModalVisible={addModalVisible}
+          handleAddModalCancel={this.handleAddModalCancel}
         />
       </div>
     );

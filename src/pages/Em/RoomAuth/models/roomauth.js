@@ -5,6 +5,8 @@ import {
   getRooms,
   getUsers,
   updateRoomUser,
+  addRoom,
+  deleteRoom,
 } from '@/services/em';
 
 export default {
@@ -19,6 +21,11 @@ export default {
     userList: [],
     authForm: {
       user_no: { value: null }
+    },
+    addForm: {
+      area_id: { value: null },
+      room_name: { value: null },
+      user_no: { value: null },
     }
   },
   reducers: {
@@ -66,6 +73,24 @@ export default {
         }));
       } else {
         message.error('更新失败！');
+      }
+    },
+    *addRoom({ payload }, { call, put }) {
+      const { status, message: messages } = yield call(addRoom, payload);
+      if (status === 'ok') {
+        message.success(messages);
+        yield put(Action('getRooms'));
+      } else {
+        message.error(messages);
+      }
+    },
+    *deleteRoom({ payload }, { call, put }) {
+      const { status, message: messages } = yield call(deleteRoom, payload.room_id);
+      if (status === 'ok') {
+        message.success(messages);
+        yield put(Action('getRooms'));
+      } else {
+        message.error(messages);
       }
     }
   },

@@ -1,7 +1,8 @@
 import React from 'react';
-import { Table, Button } from 'antd';
+import { Table, Button, Divider, Popconfirm } from 'antd';
 import { connect } from 'dva';
 import AuthModal from './AuthModal';
+import AddModal from './AddModal'
 import { Action } from '../../../utils/utils';
 
 
@@ -11,6 +12,7 @@ import { Action } from '../../../utils/utils';
 class AreaList extends React.Component {
   state = {
     modalVisible: false,
+    addModalVisible: false,
   };
 
   componentDidMount() {
@@ -18,7 +20,17 @@ class AreaList extends React.Component {
     this.props.dispatch(Action('areaauth/getAreas'));
   }
 
-  handleCancel = () => this.setState({ modalVisible: false });
+  handleCancel = () => this.setState({ modalVisible: false })
+
+  handleAddModalCancel = () => this.setState({ addModalVisible: false })
+
+  handleAddClick = () => this.setState({ addModalVisible: true })
+
+  handleDelete = record => () => {
+    this.props.dispatch(Action('areaauth/deleteArea', {
+      area_id: record.id
+    }))
+  }
 
   handleOk = () => this.props.dispatch(Action('areaauth/updateAreaUser'))
     .then(() => this.handleCancel())
@@ -35,7 +47,7 @@ class AreaList extends React.Component {
   handleBatchAuthClick = () => this.setState({ modalVisible: true })
 
   render() {
-    const { modalVisible } = this.state;
+    const { modalVisible, addModalVisible } = this.state;
     const { areaList, selectedRowKeys } = this.props;
     const columns = [
       {
@@ -52,12 +64,23 @@ class AreaList extends React.Component {
         dataIndex: 'user_name',
       },
       {
+        title: '教室数量',
+        dataIndex: 'room_count',
+      },
+      {
         title: '操作',
         dataIndex: 'action',
         render: (value, record) => {
           return (
             <span>
               <a onClick={this.handleAuthClick(record)}>授权</a>
+              <Divider type="vertical" />
+              <Popconfirm
+                title="确定删除？"
+                onConfirm={this.handleDelete(record)}
+              >
+                <a>删除</a>
+              </Popconfirm>
             </span>
           );
         },
@@ -65,14 +88,24 @@ class AreaList extends React.Component {
     ];
     return (
       <div>
-        <div style={{ textAlign: 'right', height: '40px' }}>
-          <Button
-            disabled={!selectedRowKeys.length}
-            type="primary"
-            onClick={this.handleBatchAuthClick}
-          >
-            批量授权
-          </Button>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '40px' }}>
+          <div>
+            <Button
+              type="primary"
+              onClick={this.handleAddClick}
+            >
+              新增区域
+            </Button>
+          </div>
+          <div>
+            <Button
+              disabled={!selectedRowKeys.length}
+              type="primary"
+              onClick={this.handleBatchAuthClick}
+            >
+              批量授权
+            </Button>
+          </div>
         </div>
         <Table
           columns={columns}
@@ -87,6 +120,10 @@ class AreaList extends React.Component {
           modalVisible={modalVisible}
           handleCancel={this.handleCancel}
           handleOk={this.handleOk}
+        />
+        <AddModal
+          addModalVisible={addModalVisible}
+          handleAddModalCancel={this.handleAddModalCancel}
         />
       </div>
     );

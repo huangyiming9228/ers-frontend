@@ -1,7 +1,7 @@
 import React from 'react'
-import { Modal, Form, Select } from 'antd'
+import { Modal, Form, Input, Select } from 'antd'
 import { connect } from 'dva'
-import { Action } from '../../../utils/utils';
+import { Action } from '../../../utils/utils'
 
 const FormItem = Form.Item;
 const formItemLayout = {
@@ -12,61 +12,78 @@ const Option = Select.Option;
 
 @connect(({ areaauth, loading }) => ({
   ...areaauth,
-  confirmLoading: loading.effects['areaauth/updateAreaUser']
+  confirmLoading: loading.effects['areaauth/addArea']
 }))
 @Form.create({
   mapPropsToFields(props) {
-    const { authForm = null } = props;
-    return Object.entries(authForm).reduce((item, [key, value]) => {
-      // eslint-disable-next-line no-param-reassign
+    const { addForm = null } = props;
+    return Object.entries(addForm).reduce((item, [key, value]) => {
       item[key] = Form.createFormField({ ...value });
       return item;
     }, {});
   },
   onFieldsChange(props, changedFields) {
-    const { dispatch, authForm } = props;
+    const { dispatch, addForm } = props;
     const changedItems = Object.entries(changedFields).reduce((item, [key, value]) => {
-      // eslint-disable-next-line no-param-reassign
       item[key] = { ...value };
       return item;
     }, {});
     dispatch(
       Action('areaauth/save', {
-        authForm: {
-          ...authForm,
+        addForm: {
+          ...addForm,
           ...changedItems,
         },
       })
     );
   },
 })
-class AuthModal extends React.Component{
+class AddModal extends React.Component {
+
+  handleOk = () => {
+    const {
+      form: { validateFields },
+      dispatch,
+      handleAddModalCancel,
+    } = this.props;
+    validateFields((errors, values) => {
+      if (!errors) {
+        dispatch(Action('areaauth/addArea', {
+          ...values
+        })).then(() => handleAddModalCancel())
+      }
+    })
+  }
+
   render() {
     const {
       form: { getFieldDecorator },
-      modalVisible,
-      handleCancel,
-      handleOk,
+      addModalVisible,
+      handleAddModalCancel,
       confirmLoading,
-      userList,
-      authForm: {
-        user_no: { value: userNo }
-      }
+      userList
     } = this.props;
     return (
       <Modal
-        title="选择负责人"
-        visible={modalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
+        title="新增区域"
+        visible={addModalVisible}
+        onOk={this.handleOk}
+        onCancel={handleAddModalCancel}
         maskClosable={false}
         destroyOnClose
         confirmLoading={confirmLoading}
-        okButtonProps={{
-          disabled: !userNo
-        }}
       >
         <Form layout="horizontal">
+          <FormItem {...formItemLayout} label="区域名称">
+            {getFieldDecorator('area_name', {
+              rules: [{
+                required: true,
+                message: '请输入区域名称！'
+              }],
+            })(
+              <Input />
+            )}
+          </FormItem>
           <FormItem {...formItemLayout} label="负责人">
             {getFieldDecorator('user_no', {
               rules: [{
@@ -96,4 +113,4 @@ class AuthModal extends React.Component{
   }
 }
 
-export default AuthModal
+export default AddModal
