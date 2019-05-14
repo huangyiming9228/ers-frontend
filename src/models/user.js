@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import { query as queryUsers, queryCurrent, updateUserInfo, updatePassword } from '@/services/user';
+import { query as queryUsers, getCurrentUser, updateUserInfo, updatePassword } from '@/services/user';
 import { Action } from '../utils/utils';
 
 export default {
@@ -19,7 +19,7 @@ export default {
       });
     },
     *fetchCurrent(_, { call, put }) {
-      const response = yield call(queryCurrent);
+      const response = yield call(getCurrentUser);
       yield put({
         type: 'saveCurrentUser',
         payload: response,
