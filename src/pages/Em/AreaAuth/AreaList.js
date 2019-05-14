@@ -5,28 +5,29 @@ import AuthModal from './AuthModal';
 import { Action } from '../../../utils/utils';
 
 
-@connect(({ roomauth }) => ({
-  ...roomauth,
+@connect(({ areaauth }) => ({
+  ...areaauth,
 }))
-class RoomList extends React.Component {
+class AreaList extends React.Component {
   state = {
     modalVisible: false,
   };
 
   componentDidMount() {
-    this.props.dispatch(Action('roomauth/getUsers'));
+    this.props.dispatch(Action('areaauth/getUsers'));
+    this.props.dispatch(Action('areaauth/getAreas'));
   }
 
   handleCancel = () => this.setState({ modalVisible: false });
 
-  handleOk = () => this.props.dispatch(Action('roomauth/updateRoomUser'))
+  handleOk = () => this.props.dispatch(Action('areaauth/updateAreaUser'))
     .then(() => this.handleCancel())
 
-  hanldeSelectedKeysChange = selectedRowKeys  => this.props.dispatch(Action('roomauth/save', { selectedRowKeys }));
+  hanldeSelectedKeysChange = selectedRowKeys  => this.props.dispatch(Action('areaauth/save', { selectedRowKeys }));
 
   handleAuthClick = record => () => {
     this.setState({ modalVisible: true });
-    this.props.dispatch(Action('roomauth/save', {
+    this.props.dispatch(Action('areaauth/save', {
       selectedRowKeys: [record.id]
     }))
   }
@@ -35,7 +36,7 @@ class RoomList extends React.Component {
 
   render() {
     const { modalVisible } = this.state;
-    const { roomList, selectedRowKeys } = this.props;
+    const { areaList, selectedRowKeys } = this.props;
     const columns = [
       {
         title: '序号',
@@ -43,12 +44,8 @@ class RoomList extends React.Component {
         sorter: (a, b) => a.ln - b.ln,
       },
       {
-        title: '所属区域',
+        title: '区域',
         dataIndex: 'area_name',
-      },
-      {
-        title: '教室',
-        dataIndex: 'room_name',
       },
       {
         title: '负责人',
@@ -79,7 +76,7 @@ class RoomList extends React.Component {
         </div>
         <Table
           columns={columns}
-          dataSource={roomList}
+          dataSource={areaList}
           rowKey={record => record.id}
           rowSelection={{
             selectedRowKeys,
@@ -96,4 +93,4 @@ class RoomList extends React.Component {
   }
 }
 
-export default RoomList;
+export default AreaList;

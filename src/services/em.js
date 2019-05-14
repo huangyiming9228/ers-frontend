@@ -1,4 +1,3 @@
-import { stringify } from 'qs';
 import request from '@/utils/request';
 
 export async function getAreas(params) {
@@ -37,6 +36,13 @@ export async function getUsers() {
 
 export async function updateRoomUser(params) {
   return request('/server/api/base/updateRoomUser', {
+    method: 'POST',
+    data: params
+  })
+}
+
+export async function updateAreaUser(params) {
+  return request('/server/api/base/updateAreaUser', {
     method: 'POST',
     data: params
   })

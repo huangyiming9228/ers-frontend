@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal, Form, Select } from 'antd'
 import { connect } from 'dva'
-import { Action } from '../../utils/utils';
+import { Action } from '../../../utils/utils';
 
 const FormItem = Form.Item;
 const formItemLayout = {

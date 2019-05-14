@@ -34,10 +34,16 @@ export default [
             path: '/em/emcheck',
             name: '设备查看',
             component: './Em/EmCheck/index',
-          }, {
+          },
+          {
             path: '/em/roomauth',
             name: '教室授权',
             component: './Em/RoomAuth/index',
+          },
+          {
+            path: '/em/areaauth',
+            name: '区域授权',
+            component: './Em/AreaAuth/index',
           }
         ]
       },

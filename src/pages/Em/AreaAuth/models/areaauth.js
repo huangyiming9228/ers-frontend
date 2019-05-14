@@ -1,0 +1,56 @@
+import { message } from 'antd';
+import { Action } from '../../../../utils/utils';
+import {
+  getAreas,
+  getUsers,
+  updateAreaUser,
+} from '@/services/em';
+
+export default {
+  name: 'areaauth',
+  state: {
+    areaList: [],
+    selectedRowKeys: [],
+    userList: [],
+    authForm: {
+      user_no: { value: null }
+    }
+  },
+  reducers: {
+    save(state, { payload }) {
+      return { ...state, ...payload };
+    },
+  },
+  effects: {
+    *getAreas({ payload }, { call, put }) {
+      const { data } = yield call(getAreas, payload);
+      const areaList = data.map((item, index) => ({ ...item, ln: index + 1 }))
+      yield put(
+        Action('save', {
+          areaList,
+        })
+      );
+    },
+    *getUsers(_, { call, put }) {
+      const { data: userList } = yield call(getUsers);
+      yield put(Action('save', {
+        userList
+      }))
+    },
+    *updateAreaUser(_, { call, put, select }) {
+      const { selectedRowKeys, authForm: { user_no: { value } } } = yield select(state => state.areaauth);
+      const { status } = yield call(updateAreaUser, { keys: selectedRowKeys, user_no: value });
+      if (status === 'ok') {
+        message.success('更新成功！');
+        yield put(Action('getAreas'));
+        yield put(Action('save', {
+          authForm: {
+            user_no: { value: null }
+          }
+        }));
+      } else {
+        message.error('更新失败！');
+      }
+    }
+  },
+};
