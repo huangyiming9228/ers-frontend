@@ -30,3 +30,14 @@ export async function updateEquipmentInfo(params) {
     method: 'POST',
   });
 }
+
+export async function getUsers() {
+  return request('/server/api/base/getUsers')
+}
+
+export async function updateRoomUser(params) {
+  return request('/server/api/base/updateRoomUser', {
+    method: 'POST',
+    data: params
+  })
+}
