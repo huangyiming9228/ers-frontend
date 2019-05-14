@@ -1,8 +1,9 @@
 import React from 'react';
 import { Table, Button } from 'antd';
+import AuthModal from '@/components/AuthModal';
 import { connect } from 'dva';
 import { Action } from '../../../utils/utils';
-import AuthModal from './AuthModal'
+
 
 @connect(({ roomauth }) => ({
   ...roomauth,
