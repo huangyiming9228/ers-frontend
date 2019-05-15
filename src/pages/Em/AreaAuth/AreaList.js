@@ -16,7 +16,7 @@ class AreaList extends React.Component {
   };
 
   componentDidMount() {
-    this.props.dispatch(Action('areaauth/getUsers'));
+    this.props.dispatch(Action('areaauth/getAreaUsers'));
     this.props.dispatch(Action('areaauth/getAreas'));
   }
 

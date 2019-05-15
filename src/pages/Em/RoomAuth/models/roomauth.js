@@ -3,7 +3,7 @@ import { Action } from '../../../../utils/utils';
 import {
   getAreas,
   getRooms,
-  getUsers,
+  getRoomUsers,
   updateRoomUser,
   addRoom,
   deleteRoom,
@@ -54,8 +54,8 @@ export default {
         })
       );
     },
-    *getUsers(_, { call, put }) {
-      const { data: userList } = yield call(getUsers);
+    *getRoomUsers(_, { call, put }) {
+      const { data: userList } = yield call(getRoomUsers);
       yield put(Action('save', {
         userList
       }))

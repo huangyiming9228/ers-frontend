@@ -7,7 +7,17 @@ import {
   getEquipmentClass,
   getEquipmentInfo,
   updateEquipmentInfo,
+  addEquipment,
+  deleteEquipment,
 } from '@/services/em';
+
+const defaultAddForm = {
+  class_id: { value: null },
+  et_name: { value: null },
+  et_no: { value: null },
+  room_id: { value: null },
+  et_status: { value: 1 },
+}
 
 export default {
   name: 'em',
@@ -29,6 +39,7 @@ export default {
       area: null,
       room: null,
     },
+    addForm: defaultAddForm
   },
   reducers: {
     save(state, { payload }) {
@@ -71,6 +82,7 @@ export default {
       const equipmentClassList = data.map(item => ({
         text: item.equipment_name,
         value: item.equipment_name,
+        id: item.id
       }));
       yield put(
         Action('save', {
@@ -115,5 +127,41 @@ export default {
         message.error('更新失败！');
       }
     },
+    *addEquipment(_, { call, put, select }) {
+      const {
+        addForm: {
+          class_id: { value: class_id },
+          et_name: { value: et_name },
+          et_no: { value: et_no },
+          room_id: { value: room_id },
+          et_status: { value: et_status },
+        },
+
+      } = yield select(state => state.em);
+      const { status, message: messages } = yield call(addEquipment, {
+        class_id,
+        et_name,
+        et_no,
+        room_id,
+        et_status
+      });
+      if (status === 'ok') {
+        yield put(Action('save', {
+          addForm: defaultAddForm
+        }));
+        message.success(messages);
+      } else {
+        message.error(messages);
+      }
+    },
+    *deleteEquipment({ payload }, { call, put }) {
+      const { status, message: messages } = yield call(deleteEquipment, payload.et_id);
+      if (status === 'ok') {
+        yield put(Action('getEquipments'));
+        message.success(messages);
+      } else {
+        message.error(messages);
+      }
+    }
   },
 };

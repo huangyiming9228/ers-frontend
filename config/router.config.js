@@ -53,6 +53,7 @@ export default [
         path: '/setting',
         name: '系统设置',
         icon: 'setting',
+        authority: ['admin'],
         routes: [
           {
             path: '/setting/account',

@@ -2,7 +2,7 @@ import { message } from 'antd';
 import { Action } from '../../../../utils/utils';
 import {
   getAreas,
-  getUsers,
+  getAreaUsers,
   updateAreaUser,
   addArea,
   deleteArea
@@ -37,8 +37,8 @@ export default {
         })
       );
     },
-    *getUsers(_, { call, put }) {
-      const { data: userList } = yield call(getUsers);
+    *getAreaUsers(_, { call, put }) {
+      const { data: userList } = yield call(getAreaUsers);
       yield put(Action('save', {
         userList
       }))

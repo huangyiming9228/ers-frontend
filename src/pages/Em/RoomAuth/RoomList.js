@@ -16,7 +16,7 @@ class RoomList extends React.Component {
   };
 
   componentDidMount() {
-    this.props.dispatch(Action('roomauth/getUsers'));
+    this.props.dispatch(Action('roomauth/getRoomUsers'));
   }
 
   handleCancel = () => this.setState({ modalVisible: false });

@@ -34,6 +34,14 @@ export async function getUsers() {
   return request('/server/api/base/getUsers')
 }
 
+export async function getRoomUsers() {
+  return request('/server/api/base/getRoomUsers')
+}
+
+export async function getAreaUsers() {
+  return request('/server/api/base/getAreaUsers')
+}
+
 export async function updateRoomUser(params) {
   return request('/server/api/base/updateRoomUser', {
     method: 'POST',
@@ -68,4 +76,15 @@ export async function addRoom(params) {
 
 export async function deleteRoom(params) {
   return request(`/server/api/base/deleteRoom?room_id=${params}`)
+}
+
+export async function addEquipment(params) {
+  return request('/server/api/base/addEquipment', {
+    method: 'POST',
+    data: params
+  })
+}
+
+export async function deleteEquipment(params) {
+  return request(`/server/api/base/deleteEquipment?et_id=${params}`)
 }
