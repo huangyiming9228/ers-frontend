@@ -39,12 +39,27 @@ export default [
             path: '/em/roomauth',
             name: '教室管理',
             component: './Em/RoomAuth/index',
+            authority: ['admin', 'area_admin'],
           },
           {
             path: '/em/areaauth',
             name: '区域管理',
             component: './Em/AreaAuth/index',
+            authority: ['admin'],
           }
+        ]
+      },
+      {
+        path: '/setting',
+        name: '系统设置',
+        icon: 'setting',
+        routes: [
+          {
+            path: '/setting/account',
+            name: '账号管理',
+            component: './Setting/Account/index',
+            authority: ['admin'],
+          },
         ]
       },
       {
@@ -289,29 +304,6 @@ export default [
           },
         ],
       },
-      //  editor
-      // {
-      //   name: 'editor',
-      //   icon: 'highlight',
-      //   path: '/editor',
-      //   routes: [
-      //     {
-      //       path: '/editor/flow',
-      //       name: 'flow',
-      //       component: './Editor/GGEditor/Flow',
-      //     },
-      //     {
-      //       path: '/editor/mind',
-      //       name: 'mind',
-      //       component: './Editor/GGEditor/Mind',
-      //     },
-      //     {
-      //       path: '/editor/koni',
-      //       name: 'koni',
-      //       component: './Editor/GGEditor/Koni',
-      //     },
-      //   ],
-      // },
       {
         component: '404',
       },

@@ -36,6 +36,8 @@ module.exports = {
     'react/destructuring-assignment': 0,
     'prefer-destructuring': 0,
     'no-param-reassign': 0,
+    'camelcase': 0,
+    'dot-notation': 0,
   },
   settings: {
     polyfills: ['fetch', 'promises', 'url', 'object-assign'],
