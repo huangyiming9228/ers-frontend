@@ -56,6 +56,18 @@ export default [
         ]
       },
       {
+        path: '/complaint',
+        icon: 'form',
+        name: '投诉列表',
+        routes: [
+          {
+            path: '/complaint/food_complaint',
+            name: '卫生投诉',
+            component: './Complaint/FoodComplaint/index',
+          },
+        ],
+      },
+      {
         path: '/setting',
         name: '系统设置',
         icon: 'setting',
