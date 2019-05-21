@@ -194,3 +194,5 @@ export const importCDN = (url, name) =>
   });
 
 export const Action = (type, payload = null) => ({ type, payload });
+
+export const formatDatetime = (value, format = 'YYYY-MM-DD HH:mm:ss') => moment(value).format(format);

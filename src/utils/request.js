@@ -32,33 +32,33 @@ const errorHandler = error => {
   const errortext = codeMessage[response.status] || response.statusText;
   const { status, url } = response;
 
-  if (status === 401) {
-    notification.error({
-      message: '未登录或登录已过期，请重新登录。',
-    });
-    // @HACK
-    /* eslint-disable no-underscore-dangle */
-    window.g_app._store.dispatch({
-      type: 'login/logout',
-    });
-    return;
-  }
+  // if (status === 401) {
+  //   notification.error({
+  //     message: '未登录或登录已过期，请重新登录。',
+  //   });
+  //   // @HACK
+  //   /* eslint-disable no-underscore-dangle */
+  //   window.g_app._store.dispatch({
+  //     type: 'login/logout',
+  //   });
+  //   return;
+  // }
   notification.error({
     message: `请求错误 ${status}: ${url}`,
     description: errortext,
   });
   // environment should not be used
-  if (status === 403) {
-    router.push('/exception/403');
-    return;
-  }
-  if (status <= 504 && status >= 500) {
-    router.push('/exception/500');
-    return;
-  }
-  if (status >= 404 && status < 422) {
-    router.push('/exception/404');
-  }
+  // if (status === 403) {
+  //   router.push('/exception/403');
+  //   return;
+  // }
+  // if (status <= 504 && status >= 500) {
+  //   router.push('/exception/500');
+  //   return;
+  // }
+  // if (status >= 404 && status < 422) {
+  //   router.push('/exception/404');
+  // }
 };
 
 /**

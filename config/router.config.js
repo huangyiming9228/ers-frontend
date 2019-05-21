@@ -46,7 +46,13 @@ export default [
             name: '区域管理',
             component: './Em/AreaAuth/index',
             authority: ['admin'],
-          }
+          },
+          {
+            path: '/em/etcheckout',
+            name: '设备外借记录',
+            component: './Em/EtCheckout/index',
+            authority: ['admin'],
+          },
         ]
       },
       {
