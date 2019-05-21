@@ -1,8 +1,8 @@
 import { Action, formatDatetime } from '../../../../utils/utils';
-import { getFoodComplaintList, getFoodComplaintListDefault } from '../../../../services/complaint';
+import { getFaultComplaintList } from '../../../../services/complaint';
 
 export default {
-  name: 'foodcomplaint',
+  name: 'faultcomplaint',
   state: {
     queryForm: {
       time: { value: [null, null ] }
@@ -16,7 +16,7 @@ export default {
   },
   effects: {
     *submit(_, { call, put, select }) {
-      const { queryForm: { time: { value } } } = yield select(state => state.foodcomplaint);
+      const { queryForm: { time: { value } } } = yield select(state => state.faultcomplaint);
       const [start_time, end_time] = value;
       let params = {};
       if (start_time) {
@@ -30,11 +30,11 @@ export default {
           end_time: ''
         };
       }
-      const { data } = yield call(getFoodComplaintList, params);
+      const { data } = yield call(getFaultComplaintList, params);
       const complaintList = data.map((item, index) => ({ ...item, ln: index + 1 }));
       yield put(Action('save', {
         complaintList
       }));
-    },
+    }
   },
 };

@@ -3,10 +3,10 @@ import { Table, } from 'antd';
 import { connect } from 'dva';
 import moment from 'moment';
 
-@connect(({ foodcomplaint }) => ({
-  ...foodcomplaint,
+@connect(({ faultcomplaint }) => ({
+  ...faultcomplaint,
 }))
-class FoodComplaintList extends React.Component {
+class FaultComplaint extends React.Component {
 
   render() {
     const columns = [
@@ -28,17 +28,16 @@ class FoodComplaintList extends React.Component {
         dataIndex: 'room_user_name',
       },
       {
-        title: '投诉项',
-        dataIndex: 'complaint_text',
+        title: '故障点',
+        dataIndex: 'fault_list',
         render: (value, record) => {
-          const textArray = [];
-          if (record.dust) {
-            textArray.push('讲台粉尘多');
-          }
-          if (record.paper) {
-            textArray.push('讲台废纸多');
-          }
-          return textArray.join('，');
+          const faultList = [];
+          if (record.pe) faultList.push('投影设备');
+          if (record.computer) faultList.push('计算机');
+          if (record.se) faultList.push('音响设备');
+          if (record.desc) faultList.push('讲桌');
+          if (record.power) faultList.push('电源控制器');
+          return faultList.map((item, index) => <div>{`${index + 1}.${item}`}</div>)
         }
       },
       {
@@ -80,4 +79,4 @@ class FoodComplaintList extends React.Component {
   }
 }
 
-export default FoodComplaintList;
+export default FaultComplaint;

@@ -65,6 +65,11 @@ export default [
             name: '卫生投诉',
             component: './Complaint/FoodComplaint/index',
           },
+          {
+            path: '/complaint/fault_complaint',
+            name: '故障投诉',
+            component: './Complaint/FaultComplaint/index',
+          },
         ],
       },
       {

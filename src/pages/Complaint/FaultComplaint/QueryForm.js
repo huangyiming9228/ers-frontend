@@ -10,8 +10,8 @@ const FormItemLayout = {
 };
 const { RangePicker } = DatePicker;
 
-@connect(({ foodcomplaint }) => ({
-  ...foodcomplaint,
+@connect(({ faultcomplaint }) => ({
+  ...faultcomplaint,
 }))
 @Form.create({
   mapPropsToFields(props) {
@@ -28,7 +28,7 @@ const { RangePicker } = DatePicker;
       return item;
     }, {});
     dispatch(
-      Action('foodcomplaint/save', {
+      Action('faultcomplaint/save', {
         queryForm: {
           ...queryForm,
           ...changedItems,
@@ -40,7 +40,7 @@ const { RangePicker } = DatePicker;
 class QueryForm extends React.Component {
 
   componentDidMount() {
-    this.props.dispatch(Action('foodcomplaint/submit'))
+    this.props.dispatch(Action('faultcomplaint/submit'))
   }
 
   handleSubmit = e => {
@@ -51,7 +51,7 @@ class QueryForm extends React.Component {
     } = this.props;
     validateFields(errors => {
       if (!errors) {
-        dispatch(Action('foodcomplaint/submit'));
+        dispatch(Action('faultcomplaint/submit'));
       }
     });
   }
