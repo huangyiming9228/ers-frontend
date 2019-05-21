@@ -73,6 +73,23 @@ export default [
         ],
       },
       {
+        path: '/maintain',
+        name: '设备维护',
+        icon: 'tool',
+        routes: [
+          {
+            path: '/maintain/faulthanding',
+            name: '日常故障记录',
+            component: './EtMaintain/FaultHanding/index',
+          },
+          {
+            path: '/maintain/techhanding',
+            name: '技术故障记录',
+            // component: './Setting/Account/index',
+          },
+        ]
+      },
+      {
         path: '/setting',
         name: '系统设置',
         icon: 'setting',
