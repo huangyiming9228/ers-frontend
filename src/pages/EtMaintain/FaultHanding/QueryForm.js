@@ -42,6 +42,7 @@ class QueryForm extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(Action('faulthanding/getAreaList'));
+    this.props.dispatch(Action('faulthanding/submit'));
   }
 
   handleAreaChange = value => {
