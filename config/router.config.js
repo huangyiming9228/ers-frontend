@@ -85,7 +85,7 @@ export default [
           {
             path: '/maintain/techhanding',
             name: '技术故障记录',
-            // component: './Setting/Account/index',
+            component: './EtMaintain/TechHanding/index',
           },
         ]
       },
