@@ -101,17 +101,17 @@ export default [
               {
                 path: '/polling/ups/list',
                 name: 'UPS巡检记录',
-                // component: './EtMaintain/FaultHanding/index',
+                // component: './Polling/Ups/AreaAuth/index',
               },
               {
                 path: '/polling/ups/areaauth',
                 name: 'UPS区域管理',
-                // component: './EtMaintain/FaultHanding/index',
+                component: './Polling/Ups/AreaAuth/index',
               },
               {
                 path: '/polling/ups/roomauth',
                 name: 'UPS机房管理',
-                // component: './EtMaintain/FaultHanding/index',
+                component: './Polling/Ups/RoomAuth/index',
               },
             ]
           },
