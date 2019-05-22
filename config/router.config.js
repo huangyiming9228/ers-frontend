@@ -118,6 +118,23 @@ export default [
           {
             path: '/polling/machine',
             name: '机房巡检',
+            routes: [
+              {
+                path: '/polling/machine/list',
+                name: '机房巡检记录',
+                component: './Polling/Machine/CheckList/index',
+              },
+              {
+                path: '/polling/machine/areaauth',
+                name: '机房区域管理',
+                component: './Polling/Machine/AreaAuth/index',
+              },
+              {
+                path: '/polling/machine/roomauth',
+                name: '机房管理',
+                component: './Polling/Machine/RoomAuth/index',
+              },
+            ]
           },
           {
             path: '/polling/warehouse',
