@@ -1,4 +1,5 @@
 import request from '@/utils/request';
+import { stringify } from 'qs';
 
 export async function getAreas() {
   return request('/server/api/polling/getUpsAreas');
@@ -50,4 +51,8 @@ export async function addRoom(params) {
 
 export async function deleteRoom(params) {
   return request(`/server/api/polling/deleteUpsRoom?room_id=${params}`)
+}
+
+export async function getUpsCheckList(params) {
+  return request(`/server/api/polling/getUpsCheckList?${stringify(params)}`);
 }

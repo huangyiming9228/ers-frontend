@@ -101,7 +101,7 @@ export default [
               {
                 path: '/polling/ups/list',
                 name: 'UPS巡检记录',
-                // component: './Polling/Ups/AreaAuth/index',
+                component: './Polling/Ups/CheckList/index',
               },
               {
                 path: '/polling/ups/areaauth',
