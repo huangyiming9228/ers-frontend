@@ -107,11 +107,13 @@ export default [
                 path: '/polling/ups/areaauth',
                 name: 'UPS区域管理',
                 component: './Polling/Ups/AreaAuth/index',
+                authority: ['admin'],
               },
               {
                 path: '/polling/ups/roomauth',
                 name: 'UPS机房管理',
                 component: './Polling/Ups/RoomAuth/index',
+                authority: ['admin'],
               },
             ]
           },
@@ -128,11 +130,13 @@ export default [
                 path: '/polling/machine/areaauth',
                 name: '机房区域管理',
                 component: './Polling/Machine/AreaAuth/index',
+                authority: ['admin'],
               },
               {
                 path: '/polling/machine/roomauth',
                 name: '机房管理',
                 component: './Polling/Machine/RoomAuth/index',
+                authority: ['admin'],
               },
             ]
           },
@@ -149,11 +153,13 @@ export default [
                 path: '/polling/warehouse/areaauth',
                 name: '库房区域管理',
                 component: './Polling/Warehouse/AreaAuth/index',
+                authority: ['admin'],
               },
               {
                 path: '/polling/warehouse/roomauth',
                 name: '库房管理',
                 component: './Polling/Warehouse/RoomAuth/index',
+                authority: ['admin'],
               },
             ]
           },
@@ -228,6 +234,12 @@ export default [
             authority: ['admin'],
           },
         ]
+      },
+      {
+        path: '/home',
+        name: '主页',
+        component: 'BlankLayout',
+        hideInMenu: true,
       },
       {
         component: '404',

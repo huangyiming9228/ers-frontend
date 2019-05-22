@@ -36,7 +36,8 @@ export default {
             redirect = null;
           }
         }
-        yield put(routerRedux.replace(redirect || '/em/emcheck'));
+        // yield put(routerRedux.replace(redirect || '/em/emcheck'));
+        yield put(routerRedux.replace('/home'));
       }
     },
 
