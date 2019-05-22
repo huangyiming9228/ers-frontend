@@ -6,10 +6,10 @@ import {
   updateAreaUser,
   addArea,
   deleteArea
-} from '@/services/ups';
+} from '@/services/warehouse';
 
 export default {
-  name: 'ups_areaauth',
+  name: 'warehouse_areaauth',
   state: {
     areaList: [],
     selectedRowKeys: [],
@@ -44,7 +44,7 @@ export default {
       }))
     },
     *updateAreaUser(_, { call, put, select }) {
-      const { selectedRowKeys, authForm: { user_no: { value } } } = yield select(state => state.ups_areaauth);
+      const { selectedRowKeys, authForm: { user_no: { value } } } = yield select(state => state.warehouse_areaauth);
       const { status } = yield call(updateAreaUser, { keys: selectedRowKeys, user_no: value });
       if (status === 'ok') {
         message.success('更新成功！');

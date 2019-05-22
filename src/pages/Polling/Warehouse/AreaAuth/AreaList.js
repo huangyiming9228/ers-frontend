@@ -6,8 +6,8 @@ import AddModal from './AddModal'
 import { Action } from '../../../../utils/utils';
 
 
-@connect(({ ups_areaauth }) => ({
-  ...ups_areaauth,
+@connect(({ warehouse_areaauth }) => ({
+  ...warehouse_areaauth,
 }))
 class AreaList extends React.Component {
   state = {
@@ -16,8 +16,8 @@ class AreaList extends React.Component {
   };
 
   componentDidMount() {
-    this.props.dispatch(Action('ups_areaauth/getAreaUsers'));
-    this.props.dispatch(Action('ups_areaauth/getAreas'));
+    this.props.dispatch(Action('warehouse_areaauth/getAreaUsers'));
+    this.props.dispatch(Action('warehouse_areaauth/getAreas'));
   }
 
   handleCancel = () => this.setState({ modalVisible: false })
@@ -27,19 +27,19 @@ class AreaList extends React.Component {
   handleAddClick = () => this.setState({ addModalVisible: true })
 
   handleDelete = record => () => {
-    this.props.dispatch(Action('ups_areaauth/deleteArea', {
+    this.props.dispatch(Action('warehouse_areaauth/deleteArea', {
       area_id: record.id
     }))
   }
 
-  handleOk = () => this.props.dispatch(Action('ups_areaauth/updateAreaUser'))
+  handleOk = () => this.props.dispatch(Action('warehouse_areaauth/updateAreaUser'))
     .then(() => this.handleCancel())
 
-  hanldeSelectedKeysChange = selectedRowKeys  => this.props.dispatch(Action('ups_areaauth/save', { selectedRowKeys }));
+  hanldeSelectedKeysChange = selectedRowKeys  => this.props.dispatch(Action('warehouse_areaauth/save', { selectedRowKeys }));
 
   handleAuthClick = record => () => {
     this.setState({ modalVisible: true });
-    this.props.dispatch(Action('ups_areaauth/save', {
+    this.props.dispatch(Action('warehouse_areaauth/save', {
       selectedRowKeys: [record.id]
     }))
   }
@@ -64,7 +64,7 @@ class AreaList extends React.Component {
         dataIndex: 'user_name',
       },
       {
-        title: '教室数量',
+        title: '库房数量',
         dataIndex: 'room_count',
       },
       {

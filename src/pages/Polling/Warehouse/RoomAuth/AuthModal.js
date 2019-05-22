@@ -8,18 +8,16 @@ const formItemLayout = {
   labelCol: { span: 6 },
   wrapperCol: { span: 18 },
 };
-// eslint-disable-next-line prefer-destructuring
 const Option = Select.Option;
 
-@connect(({ ups_roomauth, loading }) => ({
-  ...ups_roomauth,
-  confirmLoading: loading.effects['ups_roomauth/updateRoomUser']
+@connect(({ warehouse_roomauth, loading }) => ({
+  ...warehouse_roomauth,
+  confirmLoading: loading.effects['warehouse_roomauth/updateRoomUser']
 }))
 @Form.create({
   mapPropsToFields(props) {
     const { authForm = null } = props;
     return Object.entries(authForm).reduce((item, [key, value]) => {
-      // eslint-disable-next-line no-param-reassign
       item[key] = Form.createFormField({ ...value });
       return item;
     }, {});
@@ -27,12 +25,11 @@ const Option = Select.Option;
   onFieldsChange(props, changedFields) {
     const { dispatch, authForm } = props;
     const changedItems = Object.entries(changedFields).reduce((item, [key, value]) => {
-      // eslint-disable-next-line no-param-reassign
       item[key] = { ...value };
       return item;
     }, {});
     dispatch(
-      Action('ups_roomauth/save', {
+      Action('warehouse_roomauth/save', {
         authForm: {
           ...authForm,
           ...changedItems,

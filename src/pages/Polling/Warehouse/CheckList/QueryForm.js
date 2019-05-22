@@ -11,8 +11,8 @@ const FormItemLayout = {
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
-@connect(({ ups_checklist }) => ({
-  ...ups_checklist,
+@connect(({ warehouse_checklist }) => ({
+  ...warehouse_checklist,
 }))
 @Form.create({
   mapPropsToFields(props) {
@@ -29,7 +29,7 @@ const { Option } = Select;
       return item;
     }, {});
     dispatch(
-      Action('ups_checklist/save', {
+      Action('warehouse_checklist/save', {
         queryForm: {
           ...queryForm,
           ...changedItems,
@@ -41,8 +41,8 @@ const { Option } = Select;
 class QueryForm extends React.Component {
 
   componentDidMount() {
-    this.props.dispatch(Action('ups_checklist/getAreaList'));
-    this.props.dispatch(Action('ups_checklist/submit'));
+    this.props.dispatch(Action('warehouse_checklist/getAreaList'));
+    this.props.dispatch(Action('warehouse_checklist/submit'));
   }
 
   handleAreaChange = value => {
@@ -50,7 +50,7 @@ class QueryForm extends React.Component {
       dispatch,
       form: { setFieldsValue },
     } = this.props;
-    dispatch(Action('ups_checklist/getRoomList', { value })).then(() => {
+    dispatch(Action('warehouse_checklist/getRoomList', { value })).then(() => {
       setFieldsValue({
         room: null,
       });
@@ -65,7 +65,7 @@ class QueryForm extends React.Component {
     } = this.props;
     validateFields(errors => {
       if (!errors) {
-        dispatch(Action('ups_checklist/submit'));
+        dispatch(Action('warehouse_checklist/submit'));
       }
     });
   }

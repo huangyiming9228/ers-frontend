@@ -8,7 +8,7 @@ import List from './List';
 @connect(({ loading }) => ({
   loading: loading.global,
 }))
-class TechHanding extends React.Component {
+class CheckList extends React.Component {
   render() {
     const { loading } = this.props;
     return (
@@ -24,4 +24,4 @@ class TechHanding extends React.Component {
   }
 }
 
-export default TechHanding;
+export default CheckList;

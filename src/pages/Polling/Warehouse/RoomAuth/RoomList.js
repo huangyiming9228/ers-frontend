@@ -6,8 +6,8 @@ import AddModal from './AddModal';
 import { Action } from '@/utils/utils';
 
 
-@connect(({ ups_roomauth }) => ({
-  ...ups_roomauth,
+@connect(({ warehouse_roomauth }) => ({
+  ...warehouse_roomauth,
 }))
 class RoomList extends React.Component {
   state = {
@@ -16,7 +16,7 @@ class RoomList extends React.Component {
   };
 
   componentDidMount() {
-    this.props.dispatch(Action('ups_roomauth/getRoomUsers'));
+    this.props.dispatch(Action('warehouse_roomauth/getRoomUsers'));
   }
 
   handleCancel = () => this.setState({ modalVisible: false });
@@ -26,19 +26,19 @@ class RoomList extends React.Component {
   handleAddClick = () => this.setState({ addModalVisible: true })
 
   handleDelete = record => () => {
-    this.props.dispatch(Action('ups_roomauth/deleteRoom', {
+    this.props.dispatch(Action('warehouse_roomauth/deleteRoom', {
       room_id: record.id
     }))
   }
 
-  handleOk = () => this.props.dispatch(Action('ups_roomauth/updateRoomUser'))
+  handleOk = () => this.props.dispatch(Action('warehouse_roomauth/updateRoomUser'))
     .then(() => this.handleCancel())
 
-  hanldeSelectedKeysChange = selectedRowKeys  => this.props.dispatch(Action('ups_roomauth/save', { selectedRowKeys }));
+  hanldeSelectedKeysChange = selectedRowKeys  => this.props.dispatch(Action('warehouse_roomauth/save', { selectedRowKeys }));
 
   handleAuthClick = record => () => {
     this.setState({ modalVisible: true });
-    this.props.dispatch(Action('ups_roomauth/save', {
+    this.props.dispatch(Action('warehouse_roomauth/save', {
       selectedRowKeys: [record.id]
     }))
   }
@@ -59,7 +59,7 @@ class RoomList extends React.Component {
         dataIndex: 'area_name',
       },
       {
-        title: '教室',
+        title: '库房',
         dataIndex: 'room_name',
       },
       {
@@ -93,7 +93,7 @@ class RoomList extends React.Component {
               type="primary"
               onClick={this.handleAddClick}
             >
-              新增教室
+              新增库房
             </Button>
           </div>
           <div>

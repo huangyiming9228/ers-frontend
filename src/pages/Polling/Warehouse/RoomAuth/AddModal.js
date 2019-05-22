@@ -10,9 +10,9 @@ const formItemLayout = {
 };
 const Option = Select.Option;
 
-@connect(({ ups_roomauth, loading }) => ({
-  ...ups_roomauth,
-  confirmLoading: loading.effects['ups_roomauth/addRoom']
+@connect(({ warehouse_roomauth, loading }) => ({
+  ...warehouse_roomauth,
+  confirmLoading: loading.effects['warehouse_roomauth/addRoom']
 }))
 @Form.create({
   mapPropsToFields(props) {
@@ -29,7 +29,7 @@ const Option = Select.Option;
       return item;
     }, {});
     dispatch(
-      Action('ups_roomauth/save', {
+      Action('warehouse_roomauth/save', {
         addForm: {
           ...addForm,
           ...changedItems,
@@ -48,7 +48,7 @@ class AddModal extends React.Component {
     } = this.props;
     validateFields((errors, values) => {
       if (!errors) {
-        dispatch(Action('ups_roomauth/addRoom', {
+        dispatch(Action('warehouse_roomauth/addRoom', {
           ...values
         })).then(() => handleAddModalCancel())
       }
@@ -66,7 +66,7 @@ class AddModal extends React.Component {
     } = this.props;
     return (
       <Modal
-        title="新增教室"
+        title="新增库房"
         visible={addModalVisible}
         onOk={this.handleOk}
         onCancel={handleAddModalCancel}
@@ -89,11 +89,11 @@ class AddModal extends React.Component {
               </Select>
             )}
           </FormItem>
-          <FormItem {...formItemLayout} label="教室名称">
+          <FormItem {...formItemLayout} label="库房名称">
             {getFieldDecorator('room_name', {
               rules: [{
                 required: true,
-                message: '请输入教室名称！'
+                message: '请输入库房名称！'
               }],
             })(
               <Input />

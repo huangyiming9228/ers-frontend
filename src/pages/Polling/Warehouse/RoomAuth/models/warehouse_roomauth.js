@@ -7,10 +7,10 @@ import {
   updateRoomUser,
   addRoom,
   deleteRoom,
-} from '@/services/ups';
+} from '@/services/warehouse';
 
 export default {
-  name: 'ups_roomauth',
+  name: 'warehouse_roomauth',
   state: {
     queryForm: {
       area: null,
@@ -43,7 +43,7 @@ export default {
       );
     },
     *getRooms(_, { call, put, select }) {
-      const { queryForm: { area: { value } }, areaList } = yield select(state => state.ups_roomauth);
+      const { queryForm: { area: { value } }, areaList } = yield select(state => state.warehouse_roomauth);
       const { data } = yield call(getRooms, value);
       const areaName = areaList.filter(item => item.id == value)[0].area_name;
       const roomList = data.map((item, index) => ({ ...item, ln: index + 1, area_name: areaName }));
@@ -61,7 +61,7 @@ export default {
       }))
     },
     *updateRoomUser(_, { call, put, select }) {
-      const { selectedRowKeys, authForm: { user_no: { value } } } = yield select(state => state.ups_roomauth);
+      const { selectedRowKeys, authForm: { user_no: { value } } } = yield select(state => state.warehouse_roomauth);
       const { status } = yield call(updateRoomUser, { keys: selectedRowKeys, user_no: value });
       if (status === 'ok') {
         message.success('更新成功！');

@@ -3,8 +3,8 @@ import { Table, Tag } from 'antd';
 import { connect } from 'dva';
 import moment from 'moment';
 
-@connect(({ ups_checklist }) => ({
-  ...ups_checklist,
+@connect(({ warehouse_checklist }) => ({
+  ...warehouse_checklist,
 }))
 class List extends React.Component {
 
@@ -20,42 +20,28 @@ class List extends React.Component {
         dataIndex: 'area_name',
       },
       {
-        title: '教室',
+        title: '库房',
         dataIndex: 'room_name',
       },
       {
-        title: '主机是否正常',
-        dataIndex: 'host_flag',
+        title: '门窗是否关闭',
+        dataIndex: 'door_flag',
         render: value => value === 1 ? <Tag color="green">是</Tag> : <Tag color="volcano">否</Tag>
       },
       {
-        title: '外壳是否漏电',
-        dataIndex: 'shell_flag',
-        render: value => value === 1 ? <Tag color="volcano">是</Tag> : <Tag color="green">否</Tag>
-      },
-      {
-        title: '电池是否老化',
-        dataIndex: 'power_flag',
-        render: value => value === 1 ? <Tag color="volcano">是</Tag> : <Tag color="green">否</Tag>
-      },
-      {
-        title: '空调是否正常',
-        dataIndex: 'air_flag',
+        title: '环境是否安全',
+        dataIndex: 'env_flag',
         render: value => value === 1 ? <Tag color="green">是</Tag> : <Tag color="volcano">否</Tag>
       },
       {
-        title: '清洁卫生是否打扫',
-        dataIndex: 'clean_flag',
+        title: '设备是否正常存放',
+        dataIndex: 'et_flag',
         render: value => value === 1 ? <Tag color="green">是</Tag> : <Tag color="volcano">否</Tag>
       },
       {
         title: '检查时间',
         dataIndex: 'submit_time',
         sorter: (a, b) => moment(a.submit_time).isBefore(b.submit_time)
-      },
-      {
-        title: '室温（℃）',
-        dataIndex: 'temperature',
       },
       {
         title: '备注',

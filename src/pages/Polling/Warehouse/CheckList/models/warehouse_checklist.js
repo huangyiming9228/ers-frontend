@@ -1,8 +1,8 @@
 import { Action, formatDatetime } from '@/utils/utils';
-import { getAreas, getRooms, getUpsCheckList } from '@/services/ups';
+import { getAreas, getRooms, getWarehouseCheckList } from '@/services/warehouse';
 
 export default {
-  name: 'ups_checklist',
+  name: 'warehouse_checklist',
   state: {
     areaList: [],
     roomList: [],
@@ -34,13 +34,13 @@ export default {
           room: { value: room_id },
           time: { value: timeRange },
         }
-      } = yield select(state => state.ups_checklist);
+      } = yield select(state => state.warehouse_checklist);
       let [start_time = '', end_time = ''] = timeRange;
       if (start_time && end_time) {
         start_time = formatDatetime(start_time, 'YYYY-MM-DD');
         end_time = formatDatetime(end_time, 'YYYY-MM-DD');
       }
-      const { data } = yield call(getUpsCheckList, {
+      const { data } = yield call(getWarehouseCheckList, {
         area_id,
         room_id,
         start_time,

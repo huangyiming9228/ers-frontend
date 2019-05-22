@@ -10,9 +10,9 @@ const formItemLayout = {
 };
 const Option = Select.Option;
 
-@connect(({ ups_areaauth, loading }) => ({
-  ...ups_areaauth,
-  confirmLoading: loading.effects['ups_areaauth/updateAreaUser']
+@connect(({ warehouse_areaauth, loading }) => ({
+  ...warehouse_areaauth,
+  confirmLoading: loading.effects['warehouse_areaauth/updateAreaUser']
 }))
 @Form.create({
   mapPropsToFields(props) {
@@ -29,7 +29,7 @@ const Option = Select.Option;
       return item;
     }, {});
     dispatch(
-      Action('ups_areaauth/save', {
+      Action('warehouse_areaauth/save', {
         authForm: {
           ...authForm,
           ...changedItems,

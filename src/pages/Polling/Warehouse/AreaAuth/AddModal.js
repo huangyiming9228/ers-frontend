@@ -10,9 +10,9 @@ const formItemLayout = {
 };
 const Option = Select.Option;
 
-@connect(({ ups_areaauth, loading }) => ({
-  ...ups_areaauth,
-  confirmLoading: loading.effects['ups_areaauth/addArea']
+@connect(({ warehouse_areaauth, loading }) => ({
+  ...warehouse_areaauth,
+  confirmLoading: loading.effects['warehouse_areaauth/addArea']
 }))
 @Form.create({
   mapPropsToFields(props) {
@@ -29,7 +29,7 @@ const Option = Select.Option;
       return item;
     }, {});
     dispatch(
-      Action('ups_areaauth/save', {
+      Action('warehouse_areaauth/save', {
         addForm: {
           ...addForm,
           ...changedItems,
@@ -48,7 +48,7 @@ class AddModal extends React.Component {
     } = this.props;
     validateFields((errors, values) => {
       if (!errors) {
-        dispatch(Action('ups_areaauth/addArea', {
+        dispatch(Action('warehouse_areaauth/addArea', {
           ...values
         })).then(() => handleAddModalCancel())
       }

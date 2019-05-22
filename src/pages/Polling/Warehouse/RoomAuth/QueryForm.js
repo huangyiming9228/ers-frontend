@@ -8,11 +8,10 @@ const FormItemLayout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
 };
-// eslint-disable-next-line prefer-destructuring
 const Option = Select.Option;
 
-@connect(({ ups_roomauth }) => ({
-  ...ups_roomauth,
+@connect(({ warehouse_roomauth }) => ({
+  ...warehouse_roomauth,
 }))
 @Form.create({
   mapPropsToFields(props) {
@@ -29,7 +28,7 @@ const Option = Select.Option;
       return item;
     }, {});
     dispatch(
-      Action('ups_roomauth/save', {
+      Action('warehouse_roomauth/save', {
         queryForm: {
           ...queryForm,
           ...changedItems,
@@ -40,8 +39,7 @@ const Option = Select.Option;
 })
 class QueryForm extends React.Component {
   componentDidMount() {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.dispatch(Action('ups_roomauth/getAreas'));
+    this.props.dispatch(Action('warehouse_roomauth/getAreas'));
   }
 
   handleSubmit = e => {
@@ -52,7 +50,7 @@ class QueryForm extends React.Component {
     } = this.props;
     validateFields(errors => {
       if (!errors) {
-        dispatch(Action('ups_roomauth/getRooms'));
+        dispatch(Action('warehouse_roomauth/getRooms'));
       }
     });
   };

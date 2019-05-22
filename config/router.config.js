@@ -139,6 +139,23 @@ export default [
           {
             path: '/polling/warehouse',
             name: '库房巡检',
+            routes: [
+              {
+                path: '/polling/warehouse/list',
+                name: '库房巡检记录',
+                component: './Polling/Warehouse/CheckList/index',
+              },
+              {
+                path: '/polling/warehouse/areaauth',
+                name: '库房区域管理',
+                component: './Polling/Warehouse/AreaAuth/index',
+              },
+              {
+                path: '/polling/warehouse/roomauth',
+                name: '库房管理',
+                component: './Polling/Warehouse/RoomAuth/index',
+              },
+            ]
           },
         ]
       },
