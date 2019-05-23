@@ -167,23 +167,21 @@ export default [
       },
       {
         path: '/dashboard',
-        name: 'dashboard',
-        icon: 'dashboard',
+        name: '数据统计',
+        icon: 'bar-chart',
+        authority: ['admin'],
         routes: [
           {
             path: '/dashboard/analysis',
-            name: 'analysis',
+            name: '工作量统计',
             component: './Dashboard/Analysis',
+            authority: ['admin'],
           },
           {
             path: '/dashboard/monitor',
-            name: 'monitor',
+            name: '设备故障统计',
             component: './Dashboard/Monitor',
-          },
-          {
-            path: '/dashboard/workplace',
-            name: 'workplace',
-            component: './Dashboard/Workplace',
+            authority: ['admin'],
           },
         ],
       },

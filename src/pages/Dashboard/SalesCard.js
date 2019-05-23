@@ -16,6 +16,188 @@ for (let i = 0; i < 7; i += 1) {
   });
 }
 
+let rankingData = [
+  {
+    title: '测试用户4',
+    total: 273
+  },
+  {
+    title: '测试用户2',
+    total: 236
+  },
+  {
+    title: '李亮',
+    total: 188
+  },
+  {
+    title: '蒋兰',
+    total: 151
+  },
+  {
+    title: '左建国',
+    total: 134
+  },
+  {
+    title: '测试用户3',
+    total: 122
+  },
+  {
+    title: '李旭',
+    total: 115
+  },
+  {
+    title: '测试用户1',
+    total: 88
+  },
+]
+
+const changeListData = (param) => {
+  if (param === 'today') {
+    rankingData = [
+      {
+        title: '测试用户1',
+        total: 4
+      },
+      {
+        title: '左建国',
+        total: 2
+      },
+      {
+        title: '蒋兰',
+        total: 2
+      },
+      {
+        title: '测试用户2',
+        total: 1
+      },
+      {
+        title: '测试用户3',
+        total: 1
+      },
+      {
+        title: '李旭',
+        total: 0
+      },
+      {
+        title: '李亮',
+        total: 0
+      },
+      {
+        title: '测试用户4',
+        total: 5
+      },
+    ]
+  }
+  if (param === 'week') {
+    rankingData = [
+      {
+        title: '测试用户2',
+        total: 23
+      },
+      {
+        title: '测试用户1',
+        total: 19
+      },
+      {
+        title: '左建国',
+        total: 14
+      },
+      {
+        title: '李旭',
+        total: 10
+      },
+      {
+        title: '蒋兰',
+        total: 5
+      },
+      {
+        title: '测试用户3',
+        total: 3
+      },
+      {
+        title: '李亮',
+        total: 3
+      },
+      {
+        title: '测试用户4',
+        total: 2
+      },
+    ]
+  }
+  if (param === 'month') {
+    rankingData = [
+      {
+        title: '测试用户4',
+        total: 73
+      },
+      {
+        title: '测试用户1',
+        total: 66
+      },
+      {
+        title: '蒋兰',
+        total: 51
+      },
+      {
+        title: '左建国',
+        total: 34
+      },
+      {
+        title: '测试用户3',
+        total: 22
+      },
+      {
+        title: '李亮',
+        total: 18
+      },
+      {
+        title: '李旭',
+        total: 16
+      },
+      {
+        title: '测试用户2',
+        total: 10
+      },
+    ]
+  }
+  if (param === 'year') {
+    rankingData = [
+      {
+        title: '测试用户4',
+        total: 273
+      },
+      {
+        title: '测试用户2',
+        total: 236
+      },
+      {
+        title: '李亮',
+        total: 188
+      },
+      {
+        title: '蒋兰',
+        total: 151
+      },
+      {
+        title: '左建国',
+        total: 134
+      },
+      {
+        title: '测试用户3',
+        total: 122
+      },
+      {
+        title: '李旭',
+        total: 115
+      },
+      {
+        title: '测试用户1',
+        total: 88
+      },
+    ]
+  }
+}
+
 const SalesCard = memo(
   ({ rangePickerValue, salesData, isActive, handleRangePickerChange, loading, selectDate }) => (
     <Card loading={loading} bordered={false} bodyStyle={{ padding: 0 }}>
@@ -24,16 +206,40 @@ const SalesCard = memo(
           tabBarExtraContent={
             <div className={styles.salesExtraWrap}>
               <div className={styles.salesExtra}>
-                <a className={isActive('today')} onClick={() => selectDate('today')}>
+                <a
+                  className={isActive('today')}
+                  onClick={() => {
+                    selectDate('today')
+                    changeListData('today')
+                  }}
+                >
                   <FormattedMessage id="app.analysis.all-day" defaultMessage="All Day" />
                 </a>
-                <a className={isActive('week')} onClick={() => selectDate('week')}>
+                <a
+                  className={isActive('week')}
+                  onClick={() => {
+                    selectDate('week')
+                    changeListData('week')
+                  }}
+                >
                   <FormattedMessage id="app.analysis.all-week" defaultMessage="All Week" />
                 </a>
-                <a className={isActive('month')} onClick={() => selectDate('month')}>
+                <a
+                  className={isActive('month')}
+                  onClick={() => {
+                    selectDate('month')
+                    changeListData('month')
+                  }}
+                >
                   <FormattedMessage id="app.analysis.all-month" defaultMessage="All Month" />
                 </a>
-                <a className={isActive('year')} onClick={() => selectDate('year')}>
+                <a
+                  className={isActive('year')}
+                  onClick={() => {
+                    selectDate('year')
+                    changeListData('year')
+                  }}
+                >
                   <FormattedMessage id="app.analysis.all-year" defaultMessage="All Year" />
                 </a>
               </div>
@@ -48,7 +254,7 @@ const SalesCard = memo(
           tabBarStyle={{ marginBottom: 24 }}
         >
           <TabPane
-            tab={<FormattedMessage id="app.analysis.sales" defaultMessage="Sales" />}
+            tab="设备维修工作量统计"
             key="sales"
           >
             <Row>
@@ -56,12 +262,7 @@ const SalesCard = memo(
                 <div className={styles.salesBar}>
                   <Bar
                     height={295}
-                    title={
-                      <FormattedMessage
-                        id="app.analysis.sales-trend"
-                        defaultMessage="Sales Trend"
-                      />
-                    }
+                    title="工作量"
                     data={salesData}
                   />
                 </div>
@@ -69,13 +270,10 @@ const SalesCard = memo(
               <Col xl={8} lg={12} md={12} sm={24} xs={24}>
                 <div className={styles.salesRank}>
                   <h4 className={styles.rankingTitle}>
-                    <FormattedMessage
-                      id="app.analysis.sales-ranking"
-                      defaultMessage="Sales Ranking"
-                    />
+                    工作量排名
                   </h4>
                   <ul className={styles.rankingList}>
-                    {rankingListData.map((item, i) => (
+                    {rankingData.map((item, i) => (
                       <li key={item.title}>
                         <span
                           className={`${styles.rankingItemNumber} ${i < 3 ? styles.active : ''}`}
@@ -95,7 +293,7 @@ const SalesCard = memo(
               </Col>
             </Row>
           </TabPane>
-          <TabPane
+          {/* <TabPane
             tab={<FormattedMessage id="app.analysis.visits" defaultMessage="Visits" />}
             key="views"
           >
@@ -140,7 +338,7 @@ const SalesCard = memo(
                 </div>
               </Col>
             </Row>
-          </TabPane>
+          </TabPane> */}
         </Tabs>
       </div>
     </Card>

@@ -51,7 +51,7 @@ export async function fakeSubmitForm(params) {
 }
 
 export async function fakeChartData() {
-  return request('/api/fake_chart_data');
+  return request(`/api/fake_chart_data?v=${new Date().getTime()}`);
 }
 
 export async function queryTags() {

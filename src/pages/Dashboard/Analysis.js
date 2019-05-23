@@ -135,9 +135,9 @@ class Analysis extends Component {
 
     return (
       <GridContent>
-        <Suspense fallback={<PageLoading />}>
+        {/* <Suspense fallback={<PageLoading />}>
           <IntroduceRow loading={loading} visitData={visitData} />
-        </Suspense>
+        </Suspense> */}
         <Suspense fallback={null}>
           <SalesCard
             rangePickerValue={rangePickerValue}
@@ -148,7 +148,7 @@ class Analysis extends Component {
             selectDate={this.selectDate}
           />
         </Suspense>
-        <div className={styles.twoColLayout}>
+        {/* <div className={styles.twoColLayout}>
           <Row gutter={24} type="flex">
             <Col xl={12} lg={24} md={24} sm={24} xs={24}>
               <Suspense fallback={null}>
@@ -182,7 +182,7 @@ class Analysis extends Component {
             offlineChartData={offlineChartData}
             handleTabChange={this.handleTabChange}
           />
-        </Suspense>
+        </Suspense> */}
       </GridContent>
     );
   }
