@@ -262,7 +262,7 @@ const SalesCard = memo(
                 <div className={styles.salesBar}>
                   <Bar
                     height={295}
-                    title="工作量"
+                    title="全年工作量"
                     data={salesData}
                   />
                 </div>

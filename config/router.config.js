@@ -180,7 +180,7 @@ export default [
           {
             path: '/dashboard/monitor',
             name: '设备故障统计',
-            component: './Dashboard/Monitor',
+            component: './Dashboard/EtFault/index',
             authority: ['admin'],
           },
         ],
